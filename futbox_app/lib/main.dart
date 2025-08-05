@@ -17,6 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       title: 'Futbox Test',
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Prueba Visual')),
+        body: Center(
+          child: Image.asset('assets/image/Cancha3.jpg'),
+        ),
+      ),
     );
   }
 }
