@@ -19,7 +19,7 @@ class Cancha {
       nombre: json['nombre'],
       tipo: json['tipo'],
       ubicacion: json['ubicación'],
-      imagen: json['imagen_url'],
+      imagen: json['imagen'],
     );
   }
 
@@ -28,7 +28,7 @@ class Cancha {
     'nombre': nombre,
     'tipo': tipo,
     'ubicación': ubicacion,
-    'imagen_url': imagen,
+    'imagen': imagen,
   };
 }
 
@@ -38,56 +38,56 @@ final List<Cancha> canchasDisponibles = [
     nombre: 'Sportmania',
     tipo: 'Fútbol',
     ubicacion: ' Bo. Las acacias, San Pedro Sula ',
-    imagen: 'https://ejemplo.com/sportmania.jpg',
+    imagen: 'assets/image/Cancha1.jpg',
   ),
   Cancha(
     id: 2,
     nombre: 'Cancha La Fuente',
     tipo: 'Fútbol',
     ubicacion: 'Bo. La Fuente, San Pedro Sula',
-    imagen: 'https://ejemplo.com/lafuente.jpg',
+    imagen: 'assets/image/Cancha2.jpg',
   ),
   Cancha(
     id: 3,
     nombre: 'Galaxy Fútbol',
     tipo: 'Fútbol',
     ubicacion: 'Colonia Trejo, San Pedro Sula',
-    imagen: 'https://ejemplo.com/galaxy.jpg',
+    imagen: 'assets/image/Cancha3.jpg',
   ),
   Cancha(
     id: 4,
     nombre: 'Las Palmas',
     tipo: 'Vóleibol',
     ubicacion: 'Bo. Las Palmas, San Pedro Sula',
-    imagen: 'https://ejemplo.com/palmas.jpg',
+    imagen: 'assets/image/Cancha4.jpg',
   ),
   Cancha(
     id: 5,
     nombre: 'Sportmania',
     tipo: 'Basquetball',
     ubicacion: 'Bo. Las acacias, San Pedro Sula ',
-    imagen: 'https://ejemplo.com/arenanorte.jpg',
+    imagen: 'assets/image/Cancha5.jpg',
   ),
   Cancha(
     id: 6,
     nombre: 'Complejo Emil Martínez',
     tipo: 'Fútbol',
     ubicacion: '21 Avenida N.O, San Pedro Sula',
-    imagen: 'https://ejemplo.com/emil.jpg',
+    imagen: 'assets/image/Cancha6.jpg',
   ),
   Cancha(
     id: 7,
     nombre: 'Zona Deportiva SPS',
     tipo: 'Fútbol',
     ubicacion: 'Col. Moderna, San Pedro Sula',
-    imagen: 'https://ejemplo.com/zonasps.jpg',
+    imagen: 'assets/image/Cancha7.jpg',
   ),
   Cancha(
     id: 8,
     nombre: 'Soccer City',
     tipo: 'Fútbol rápido',
     ubicacion: 'Col. Los Álamos, San Pedro Sula',
-    imagen: 'https://ejemplo.com/alamos.jpg',
+    imagen: 'assets/image/Cancha8.jpg',
   ),
 
 ];
