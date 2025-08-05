@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433652238558",
+    "project_id": "futbox-project",
+    "storage_bucket": "futbox-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433652238558:android:9da735d287becf16451a4f",
+        "android_client_info": {
+          "package_name": "com.example.futbox_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl_x16Vk8CnMAyb9PnRe8ZZ1w-r_abD7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
