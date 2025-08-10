@@ -20,24 +20,26 @@ class CalendarioPage extends StatelessWidget {
     );
 
     return Scaffold(
+      backgroundColor: Color(0xFFE3F2FD),
       appBar: AppBar(
-        title: Text('Reservas - $canchaId'),
+        backgroundColor: Color(0xFF1565C0),
+        title: Text('Reservas - $canchaId',style: TextStyle(color: Colors.white),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
 
           children: [
-            // 📅 Selector de fecha
+            // Selector de fecha
             Obx(() {
               final fecha = fechaSeleccionada.value;
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      fechaSeleccionada.value = fecha.subtract(const Duration(days: 1));
+                      fechaSeleccionada.value = fecha.subtract(Duration(days: 1));
                       controller.cargarReservas(
                         canchaId,
                         DateFormat('dd/MM/yyyy').format(fechaSeleccionada.value),
@@ -46,12 +48,12 @@ class CalendarioPage extends StatelessWidget {
                   ),
                   Text(
                     DateFormat('EEEE dd/MM/yyyy', 'es_ES').format(fecha),
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, color: Color(0xFF1565C0)),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.arrow_forward),
+                    icon: Icon(Icons.arrow_forward),
                     onPressed: () {
-                      fechaSeleccionada.value = fecha.add(const Duration(days: 1));
+                      fechaSeleccionada.value = fecha.add(Duration(days: 1));
                       controller.cargarReservas(
                         canchaId,
                         DateFormat('dd/MM/yyyy').format(fechaSeleccionada.value),
@@ -62,30 +64,30 @@ class CalendarioPage extends StatelessWidget {
               );
             }),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
-            // 🟩 Card de horas libres
+            // Card de horas libres
             Obx(() {
               final libres = controller.horasLibres;
               return Card(
                 elevation: 3,
-                color: Colors.green[50],
-                margin: const EdgeInsets.symmetric(vertical: 8),
+                color: Color(0xFFE8F5E9),
+                margin: EdgeInsets.symmetric(vertical: 8),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Horas libres:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 8),
+                      Text("Horas libres:", style: TextStyle(fontSize: 16, color: Colors.green.shade700)),
+                      SizedBox(height: 8),
                       if (libres.isEmpty)
-                        const Text("No hay horas libres disponibles.")
+                        Text("No hay horas libres disponibles.")
                       else
                         Wrap(
                           spacing: 8,
                           children: libres.map((h) => Chip(
                             label: Text("$h:00"),
-                            avatar: const Icon(Icons.check_circle, color: Colors.green),
+                            avatar: Icon(Icons.check_circle, color: Colors.green.shade600),
                           )).toList(),
                         ),
                     ],
@@ -94,7 +96,7 @@ class CalendarioPage extends StatelessWidget {
               );
             }),
 
-            // 🟥 Card de horas ocupadas
+            // Card de horas ocupadas
             Obx(() {
               final ocupadas = controller.horasOcupadas;
               return Expanded(
@@ -102,23 +104,23 @@ class CalendarioPage extends StatelessWidget {
                   width: double.infinity,
                   child: Card(
                     elevation: 3,
-                    color: Colors.red[50],
-                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    color: Color(0xFFFFEBEE),
+                    margin: EdgeInsets.symmetric(vertical: 8),
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(12.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Horas ocupadas:", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 8),
+                          Text("Horas ocupadas:", style: TextStyle(fontSize: 16, color: Colors.red.shade700)),
+                          SizedBox(height: 8),
                           if (ocupadas.isEmpty)
-                            const Text("No hay reservas para este día.")
+                            Text("No hay reservas para este día.")
                           else
                             Wrap(
                               spacing: 8,
                               children: ocupadas.map((h) => Chip(
                                 label: Text("$h:00"),
-                                avatar: const Icon(Icons.cancel, color: Colors.red),
+                                avatar: Icon(Icons.cancel, color: Colors.red.shade600),
                                 
                               )).toList(),
                             ),

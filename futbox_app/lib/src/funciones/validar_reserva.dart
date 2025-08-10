@@ -142,11 +142,13 @@ class ValidarReserva {
               );
               Navigator.pop(context);
               onSuccess();
+              
             },
             child: Text("Confirmar"),
           ),
         ],
       ),
+    
     );
   }
   //Funcion para formatear la hora

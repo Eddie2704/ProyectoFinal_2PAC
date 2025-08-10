@@ -1,13 +1,11 @@
-import 'package:futbox_app/src/Funciones/funciones_calendario.dart';
+import 'package:futbox_app/src/funciones/funciones_calendario.dart';
 import 'package:get/get.dart';
-
-
 
 class CalendarioController extends GetxController {
 
-  var horasLibres = <int>[].obs;
-  var horasOcupadas = <int>[].obs;
-  var reservas = <Map<String, dynamic>>[].obs;
+  final horasLibres = <int>[].obs;
+  final horasOcupadas = <int>[].obs;
+  final reservas = <Map<String, dynamic>>[].obs;
 
   // Cargar reservas y calcular disponibilidad
   Future<void> cargarReservas(String canchaId, String fecha) async {
