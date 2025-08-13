@@ -1,26 +1,20 @@
-
-
 import 'package:flutter/material.dart';
-//import 'package:futbox_app/src/views/homepage.dart';
 import 'package:futbox_app/src/views/registro.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:go_router/go_router.dart';
 
-
 class LoginPage extends StatefulWidget{
-  LoginPage({super.key});
-
+  const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
-  
+  LoginPageState createState() => LoginPageState();
   }
-  class _LoginPageState extends State<LoginPage>{
+
+  class LoginPageState extends State<LoginPage>{
     //user o correo controllorer 
-    final userController = TextEditingController(text: "correo@ejemplo.com");
-    final passwordController = TextEditingController(text: "abc123@!");
+    final userController = TextEditingController();
+    final passwordController = TextEditingController();
     bool isPassWordVisible = false;
-
-
 
     @override
     Widget build(BuildContext context){    
@@ -34,7 +28,6 @@ class LoginPage extends StatefulWidget{
                 //image: AssetImage("assets/ENTRADA.gif"),
                 fit: BoxFit.cover,
                 ),
-               
             ),
           ),
           Center(
@@ -62,13 +55,13 @@ class LoginPage extends StatefulWidget{
                     style: TextStyle(
                       fontSize: 45,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue
+                      color: Color(0xFF1565C0)
                     ),
                     ),
                     SizedBox(height: 50),
                     TextField(controller: userController,
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: Colors.black,
                     ),
                     keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
@@ -84,12 +77,11 @@ class LoginPage extends StatefulWidget{
                       label: Text("Ingrese su correo",
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                       ),
                       hintText: "Ingrese el correo",
-                      prefixIcon: Icon(Icons.email_rounded),
+                      prefixIcon: Icon(Icons.email_rounded,color: Colors.indigo.shade800,),
                     ),
                     ),
                     SizedBox(height: 50,),
@@ -114,12 +106,11 @@ class LoginPage extends StatefulWidget{
                         label: Text("Ingrese la contraseña",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         )),
                         hintText: "Ingrese la contraseña",
-                        prefix: Icon(Icons.password_outlined,
-                        color: Colors.black,),
+                        prefixIcon: Icon(Icons.password_outlined,
+                        color: Colors.indigo.shade800),
                         suffixIcon: IconButton(onPressed: (){
                           setState((){
                             isPassWordVisible =! isPassWordVisible;
@@ -129,23 +120,21 @@ class LoginPage extends StatefulWidget{
                         
                       ),
                     ),
-                    Container(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("¿No tienes una cuenta?"),
-                          TextButton(onPressed: (){
-                          /*  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroPage(),
-                      ),
-                      ) ;*/
-                     /* Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroPage();
-                      ),
-                      )  falta el registropage*/
-                    }, child: Text("Crea una aqui"))
-                    ],
-                    ),  
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("¿No tienes una cuenta?"),
+                        TextButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroPage(),
                     ),
+                    ) ;
+                    /* Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroPage();
+                    ),
+                    )  falta el registropage*/
+                                        }, child: Text("Crea una aqui"))
+                                        ],
+                                        ),
                     //aqui puede ir iniciio con google o ios
 
                     SizedBox(height: 20,),
@@ -184,7 +173,7 @@ class LoginPage extends StatefulWidget{
                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
                           //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage()),);
                          // Navigator.push(context ,MaterialPageRoute(builder: (context) => HomePage()),);
-                         context.go('/');
+                        context.go('/');
 
                         }else{
                           showDialog(
@@ -233,12 +222,15 @@ class LoginPage extends StatefulWidget{
                             );
                           });
                           return;
-                        }
-                        context.go('/');
+                        }   
+                        // registrar el login del usuario
+                          GetStorage().write('isLoggedIn', true);
+                          GetStorage().write('user', userController.text);
+                          context.go('/');
                       }, 
-                       
                       child: const Text("INGRESAR")),
                     ),
+                    
                   ],
                 ),
               ),
