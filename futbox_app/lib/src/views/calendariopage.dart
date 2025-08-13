@@ -77,42 +77,45 @@ class CalendarioPage extends StatelessWidget {
             // Card de horas libres
             Obx(() {
               final libres = controller.horasLibres;
-              return Card(
-                elevation: 3,
-                color: Color(0xFFE8F5E9),
-                margin: EdgeInsets.symmetric(vertical: 8),
-                child: Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Horas libres:",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.green.shade700,
+              return SizedBox(
+                width: double.infinity,
+                child: Card(
+                  elevation: 3,
+                  color: Color(0xFFE8F5E9),
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Horas libres:",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.green.shade700,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8),
-                      if (libres.isEmpty)
-                        Text("No hay horas libres disponibles.")
-                      else
-                        Wrap(
-                          spacing: 8,
-                          children:
-                              libres
-                                  .map(
-                                    (h) => Chip(
-                                      label: Text("$h:00"),
-                                      avatar: Icon(
-                                        Icons.check_circle,
-                                        color: Colors.green.shade600,
+                        SizedBox(height: 8),
+                        if (libres.isEmpty)
+                          Text("No hay horas libres disponibles.")
+                        else
+                          Wrap(
+                            spacing: 8,
+                            children:
+                                libres
+                                    .map(
+                                      (h) => Chip(
+                                        label: Text("$h:00"),
+                                        avatar: Icon(
+                                          Icons.check_circle,
+                                          color: Colors.green.shade600,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                        ),
-                    ],
+                                    )
+                                    .toList(),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               );

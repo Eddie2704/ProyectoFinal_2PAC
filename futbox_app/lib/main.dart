@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:futbox_app/firebase_options.dart';
 import 'package:futbox_app/src/views/calendariopage.dart';
 import 'package:futbox_app/src/views/homepage.dart';
 import 'package:futbox_app/src/views/loginpage.dart';
-//import 'package:futbox_app/src/views/loginpage.dart';
 import 'package:futbox_app/src/views/reservepage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -17,11 +17,13 @@ void main() async {
 
   // Inicializar datos de localización para fechas en español
   await initializeDateFormatting('es', null);
-
-  // Comprobar si hay un usuario autenticado
-  //final user = FirebaseAuth.instance.currentUser;
   
-  //runApp(MyApp(initialRoute: user == null ? '/perfil/1' : '/'));
+  
+  // Bloquear orientación vertical
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(MyApp());
 }
