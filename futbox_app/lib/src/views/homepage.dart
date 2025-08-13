@@ -84,7 +84,10 @@ class HomePage extends StatelessWidget {
                         ),
                         onPressed: () {
                           //context.push("/reservepage/${index + 1}");
-                          GoRouter.of(context).push('/reservepage');
+                          //GoRouter.of(context).push('/reservepage');
+                          final visualIndex = index + 1; // Sumamos 1
+                          final visualIndexStr = visualIndex.toString();
+                          context.push('/reservepage/$visualIndexStr');
                         },
                         icon: const Icon(
                           Icons.event_available,
@@ -101,7 +104,10 @@ class HomePage extends StatelessWidget {
                         ),
                         onPressed: () {
                           //context.push("/calendariopage/${index + 1}");
-                          GoRouter.of(context).push('/calendariopage');
+                          //GoRouter.of(context).push('/calendariopage');
+                          final visualIndex = index + 1; // Sumamos 1
+                          final visualIndexStr = visualIndex.toString();
+                          context.push('/calendariopage/$visualIndexStr');
                         },
                         icon: const Icon(
                           Icons.calendar_today,

@@ -35,12 +35,23 @@ class MyApp extends StatelessWidget {
       GoRoute(path: '/', builder: (context, state) => HomePage()),
 
       GoRoute(
-        path: '/reservepage',
-        builder: (context, state) => ReservePage(nombrecancha: "Cancha 3"),
+        path: '/reservepage/:index',
+        builder: (context, state) {
+          final indexStr = state.pathParameters['index'];
+          final visualIndex = int.tryParse(indexStr ?? '');
+          final realIndex = visualIndex!;
+          return ReservePage(index: realIndex.toString());
+        },
       ),
       GoRoute(
-        path: '/calendariopage',
-        builder: (context, state) => CalendarioPage(canchaId: "Cancha 3"),
+        path: '/calendariopage/:index',
+
+        builder: (context, state) {
+          final indexStr = state.pathParameters['index'];
+          final visualIndex = int.tryParse(indexStr ?? '');
+          final realIndex = visualIndex!;
+          return CalendarioPage(index: realIndex.toString());
+        },
       ),
       GoRoute(path: '/perfil/:id', builder: (context, state) => LoginPage()),
     ],

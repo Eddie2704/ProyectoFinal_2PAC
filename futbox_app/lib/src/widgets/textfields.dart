@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  
   final String label;
+  final String? hintText;
   final TextEditingController? controller;
   final bool obscureText;
   final Widget? suffixIcon;
@@ -13,7 +13,8 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     required this.label,
-    this.read=false,
+    this.hintText,
+    this.read = false,
     this.controller,
     this.obscureText = false,
     this.suffixIcon,
@@ -30,13 +31,14 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       readOnly: read,
-      onTap: (){},
+      onTap: () {},
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder( borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        contentPadding: EdgeInsets.all(20)
+        hintText: hintText,
+        contentPadding: EdgeInsets.all(20),
       ),
     );
   }
