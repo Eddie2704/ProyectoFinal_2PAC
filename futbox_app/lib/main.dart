@@ -4,6 +4,7 @@ import 'package:futbox_app/firebase_options.dart';
 import 'package:futbox_app/src/views/calendariopage.dart';
 import 'package:futbox_app/src/views/homepage.dart';
 import 'package:futbox_app/src/views/loginpage.dart';
+//import 'package:futbox_app/src/views/loginpage.dart';
 import 'package:futbox_app/src/views/reservepage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -17,6 +18,11 @@ void main() async {
   // Inicializar datos de localización para fechas en español
   await initializeDateFormatting('es', null);
 
+  // Comprobar si hay un usuario autenticado
+  //final user = FirebaseAuth.instance.currentUser;
+  
+  //runApp(MyApp(initialRoute: user == null ? '/perfil/1' : '/'));
+
   runApp(MyApp());
 }
 
@@ -24,7 +30,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/perfil/1',
     routes: [
       GoRoute(path: '/', builder: (context, state) => HomePage()),
 
@@ -36,7 +42,7 @@ class MyApp extends StatelessWidget {
         path: '/calendariopage',
         builder: (context, state) => CalendarioPage(canchaId: "Cancha 3"),
       ),
-      GoRoute(path: '/perfil/:id', builder: (context, state) => Loginpage()),
+      GoRoute(path: '/perfil/:id', builder: (context, state) => LoginPage()),
     ],
   );
 

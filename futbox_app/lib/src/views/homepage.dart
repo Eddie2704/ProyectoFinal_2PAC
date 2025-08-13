@@ -13,6 +13,8 @@ class HomePage extends StatelessWidget {
           "Canchas Disponibles",
           style: TextStyle(color: Colors.white),
         ),
+        //para quitar la fecha en el appbar
+        //automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Color(0xFF1565C0),
       ),

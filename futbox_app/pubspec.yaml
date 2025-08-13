@@ -72,6 +72,11 @@ flutter:
   assets:
     - assets/image/
     - assets/icon/
+    - assets/image_login/balon.webp
+    - assets/image_login/Dribbbling.gif
+    - assets/image_login/ENTRADA.gif
+    - assets/image_login/full_campo.jpg
+    - assets/image_login/fut.jpeg
 
 
 
