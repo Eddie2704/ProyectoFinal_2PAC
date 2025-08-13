@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:futbox_app/src/funciones/validar_reserva.dart';
 import 'package:futbox_app/src/widgets/textfields.dart';
 
-
 class ReservePage extends StatefulWidget {
-  final String nombrecancha;
+  final String index;
 
-  const ReservePage({super.key, required this.nombrecancha});
+  const ReservePage({super.key, required this.index});
 
   @override
   State<ReservePage> createState() => _ReservePageState();
@@ -23,17 +22,18 @@ class _ReservePageState extends State<ReservePage> {
 
   @override
   Widget build(BuildContext context) {
-    final String imagen = 'assets/image/${widget.nombrecancha}.jpg';
+    final String imagen = 'assets/image/Cancha ${widget.index}.jpg';
 
     return Scaffold(
       backgroundColor: Color(0xFFE3F2FD),
-      appBar: AppBar(backgroundColor: Color(0xFF1565C0) ,
-        title: Text("Nueva Reserva",style: TextStyle(color: Colors.white),),),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF1565C0),
+        title: Text("Nueva Reserva", style: TextStyle(color: Colors.white)),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 24),
         child: Column(
           children: [
-            
             SizedBox(height: 30),
             Image.asset(imagen),
             SizedBox(height: 30),
@@ -47,30 +47,38 @@ class _ReservePageState extends State<ReservePage> {
               label: "Teléfono",
               controller: phoneController,
               keyboardType: TextInputType.phone,
-              prefixIcon: Icon(Icons.smartphone, color:  Color(0xFF00BFA5)),
+              prefixIcon: Icon(Icons.smartphone, color: Color(0xFF00BFA5)),
             ),
             SizedBox(height: 30),
             CustomTextField(
               label: "Seleccionar Fecha",
               controller: dateController,
               keyboardType: TextInputType.datetime,
-              prefixIcon: Icon(Icons.calendar_month, color:  Color(0xFF00BFA5)),
+              prefixIcon: Icon(Icons.calendar_month, color: Color(0xFF00BFA5)),
+              hintText: "Ej 12/08/2025",
             ),
             SizedBox(height: 30),
             Row(
               children: [
                 Column(
                   children: [
-                    Text("Inicio", style: TextStyle(fontSize: 20, color:   Color(0xFF1565C0))),
+                    Text(
+                      "Inicio",
+                      style: TextStyle(fontSize: 20, color: Color(0xFF1565C0)),
+                    ),
                     SizedBox(
                       width: 170,
                       child: ElevatedButton.icon(
-                        icon: Icon(Icons.access_time,color: Color(0xFF00BFA5),),
+                        icon: Icon(Icons.access_time, color: Color(0xFF00BFA5)),
                         label: Text(
-                          horaInicio != null ? horaInicio!.format(context) : 'Inicio',
+                          horaInicio != null
+                              ? horaInicio!.format(context)
+                              : 'Inicio',
                         ),
                         onPressed: () async {
-                          final hora = await ValidarReserva.seleccionarHora(context);
+                          final hora = await ValidarReserva.seleccionarHora(
+                            context,
+                          );
                           if (hora != null) {
                             setState(() {
                               horaInicio = hora;
@@ -84,16 +92,21 @@ class _ReservePageState extends State<ReservePage> {
                 Spacer(),
                 Column(
                   children: [
-                    Text("Fin", style: TextStyle(fontSize: 20, color: Colors.redAccent)),
+                    Text(
+                      "Fin",
+                      style: TextStyle(fontSize: 20, color: Colors.redAccent),
+                    ),
                     SizedBox(
                       width: 170,
                       child: ElevatedButton.icon(
-                        icon: Icon(Icons.access_time,color: Color(0xFF00BFA5),),
+                        icon: Icon(Icons.access_time, color: Color(0xFF00BFA5)),
                         label: Text(
                           horaFin != null ? horaFin!.format(context) : 'Final',
                         ),
                         onPressed: () async {
-                          final hora = await ValidarReserva.seleccionarHora(context);
+                          final hora = await ValidarReserva.seleccionarHora(
+                            context,
+                          );
                           if (hora != null) {
                             setState(() {
                               horaFin = hora;
@@ -112,19 +125,35 @@ class _ReservePageState extends State<ReservePage> {
               width: double.infinity,
               child: FloatingActionButton(
                 onPressed: () async {
-                  bool camposValidos = ValidarReserva().validarNombre(nameController.text, context) &&
-                      ValidarReserva().validarTelefono(phoneController.text, context) &&
-                      ValidarReserva().validarFechaNoPasada(dateController.text, context) &&
-                      ValidarReserva().validarHoras(horaInicio, horaFin, context);
-      
+                  bool camposValidos =
+                      ValidarReserva().validarNombre(
+                        nameController.text,
+                        context,
+                      ) &&
+                      ValidarReserva().validarTelefono(
+                        phoneController.text,
+                        context,
+                      ) &&
+                      ValidarReserva().validarFechaNoPasada(
+                        dateController.text,
+                        context,
+                      ) &&
+                      ValidarReserva().validarHoras(
+                        horaInicio,
+                        horaFin,
+                        context,
+                      );
+
                   if (camposValidos) {
-                    final horaInicioStr = ValidarReserva.formatearHora24(horaInicio!);
+                    final horaInicioStr = ValidarReserva.formatearHora24(
+                      horaInicio!,
+                    );
                     final horaFinStr = ValidarReserva.formatearHora24(horaFin!);
-      
+
                     await ValidarReserva.mostrarResumenReserva(
                       context: context,
-                      canchaId: widget.nombrecancha,
-                      canchaNombre: widget.nombrecancha,
+                      canchaId: "Cancha ${widget.index}",
+                      canchaNombre: "Cancha ${widget.index}",
                       fecha: dateController.text,
                       horaInicio: horaInicioStr,
                       horaFin: horaFinStr,
@@ -146,9 +175,7 @@ class _ReservePageState extends State<ReservePage> {
                 child: Text(
                   "Validar Reserva",
                   style: TextStyle(color: Colors.white),
-                  
                 ),
-                
               ),
             ),
           ],

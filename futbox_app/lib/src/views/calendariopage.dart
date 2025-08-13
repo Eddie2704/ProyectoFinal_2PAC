@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CalendarioPage extends StatelessWidget {
-  final String canchaId;
+  final String index;
 
-  const CalendarioPage({super.key, required this.canchaId});
+  const CalendarioPage({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CalendarioPage extends StatelessWidget {
     final Rx<DateTime> fechaSeleccionada = DateTime.now().obs;
 
     controller.cargarReservas(
-      canchaId,
+      index,
       DateFormat('dd/MM/yyyy').format(fechaSeleccionada.value),
     );
 
@@ -23,12 +23,14 @@ class CalendarioPage extends StatelessWidget {
       backgroundColor: Color(0xFFE3F2FD),
       appBar: AppBar(
         backgroundColor: Color(0xFF1565C0),
-        title: Text('Reservas - $canchaId',style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Reservas - Cancha $index',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-
           children: [
             // Selector de fecha
             Obx(() {
@@ -39,10 +41,14 @@ class CalendarioPage extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      fechaSeleccionada.value = fecha.subtract(Duration(days: 1));
+                      fechaSeleccionada.value = fecha.subtract(
+                        Duration(days: 1),
+                      );
                       controller.cargarReservas(
-                        canchaId,
-                        DateFormat('dd/MM/yyyy').format(fechaSeleccionada.value),
+                        index,
+                        DateFormat(
+                          'dd/MM/yyyy',
+                        ).format(fechaSeleccionada.value),
                       );
                     },
                   ),
@@ -55,8 +61,10 @@ class CalendarioPage extends StatelessWidget {
                     onPressed: () {
                       fechaSeleccionada.value = fecha.add(Duration(days: 1));
                       controller.cargarReservas(
-                        canchaId,
-                        DateFormat('dd/MM/yyyy').format(fechaSeleccionada.value),
+                        index,
+                        DateFormat(
+                          'dd/MM/yyyy',
+                        ).format(fechaSeleccionada.value),
                       );
                     },
                   ),
@@ -78,17 +86,31 @@ class CalendarioPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Horas libres:", style: TextStyle(fontSize: 16, color: Colors.green.shade700)),
+                      Text(
+                        "Horas libres:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.green.shade700,
+                        ),
+                      ),
                       SizedBox(height: 8),
                       if (libres.isEmpty)
                         Text("No hay horas libres disponibles.")
                       else
                         Wrap(
                           spacing: 8,
-                          children: libres.map((h) => Chip(
-                            label: Text("$h:00"),
-                            avatar: Icon(Icons.check_circle, color: Colors.green.shade600),
-                          )).toList(),
+                          children:
+                              libres
+                                  .map(
+                                    (h) => Chip(
+                                      label: Text("$h:00"),
+                                      avatar: Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green.shade600,
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
                         ),
                     ],
                   ),
@@ -111,18 +133,31 @@ class CalendarioPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Horas ocupadas:", style: TextStyle(fontSize: 16, color: Colors.red.shade700)),
+                          Text(
+                            "Horas ocupadas:",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red.shade700,
+                            ),
+                          ),
                           SizedBox(height: 8),
                           if (ocupadas.isEmpty)
                             Text("No hay reservas para este día.")
                           else
                             Wrap(
                               spacing: 8,
-                              children: ocupadas.map((h) => Chip(
-                                label: Text("$h:00"),
-                                avatar: Icon(Icons.cancel, color: Colors.red.shade600),
-                                
-                              )).toList(),
+                              children:
+                                  ocupadas
+                                      .map(
+                                        (h) => Chip(
+                                          label: Text("$h:00"),
+                                          avatar: Icon(
+                                            Icons.cancel,
+                                            color: Colors.red.shade600,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                             ),
                         ],
                       ),
